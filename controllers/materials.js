@@ -1,10 +1,8 @@
 const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
 
-// const collectionName = 'jobs'; // make this an if statment that changes based on the route calling it. Change this to 'materials' for the materials controller
-
 const getAll = async (req, res, next) => {
-  const result = await mongodb.getDb().db().collection('collectionName').find();
+  const result = await mongodb.getDb().db().collection('materials').find();
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists);
@@ -16,7 +14,7 @@ const getSingle = async (req, res, next) => {
   const result = await mongodb
     .getDb()
     .db()
-    .collection('collectionName')
+    .collection('materials')
     .find({ _id: userId });
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
@@ -32,7 +30,7 @@ const createContact = async (req, res) => {
     favoriteColor: req.body.favoriteColor,
     birthday: req.body.birthday
   };
-  const response = await mongodb.getDb().db().collection('collectionName').insertOne(contact);
+  const response = await mongodb.getDb().db().collection('materials').insertOne(contact);
   if (response.acknowledged) {
     res.status(201).json(response);
   } else {
@@ -49,7 +47,7 @@ const updateContact = async (req, res) => {
     favoriteColor: req.body.favoriteColor,
     birthday: req.body.birthday
   };
-  const response = await mongodb.getDb().db().collection('collectionName').replaceOne({ _id: userId }, contact);
+  const response = await mongodb.getDb().db().collection('materials').replaceOne({ _id: userId }, contact);
   if (response.acknowledged) {
     res.status(204).send();
   } else {
@@ -59,7 +57,7 @@ const updateContact = async (req, res) => {
 
 const deleteContact = async (req, res) => {
   const userId = new ObjectId(req.params.id);
-  const response = await mongodb.getDb().db().collection('collectionName').deleteOne({ _id: userId });
+  const response = await mongodb.getDb().db().collection('materials').deleteOne({ _id: userId });
   if (response.acknowledged) {
     res.status(204).send();
   } else {
