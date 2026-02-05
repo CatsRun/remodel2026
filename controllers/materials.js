@@ -22,47 +22,47 @@ const getSingle = async (req, res, next) => {
   });
 };
 
-const createContact = async (req, res) => {
-  const contact = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    favoriteColor: req.body.favoriteColor,
-    birthday: req.body.birthday
+const createMaterial = async (req, res) => {
+  const material = {
+    materialName: req.body.materialName,
+    type: req.body.type,
+    size: req.body.size,
+    color: req.body.color,
+    price: req.body.price    
   };
-  const response = await mongodb.getDb().db().collection('materials').insertOne(contact);
+  const response = await mongodb.getDb().db().collection('materials').insertOne(material);
   if (response.acknowledged) {
     res.status(201).json(response);
   } else {
-    res.status(500).json(response.error || 'Some error occurred while creating the contact.');
+    res.status(500).json(response.error || 'Some error occurred while creating the material.');
   }
 };
 
-const updateContact = async (req, res) => {
+const updateMaterial = async (req, res) => {
   const userId = new ObjectId(req.params.id);
-  const contact = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    favoriteColor: req.body.favoriteColor,
-    birthday: req.body.birthday
+  const material = {
+    materialName: req.body.materialName,
+    type: req.body.type,
+    size: req.body.size,
+    color: req.body.color,
+    price: req.body.price 
   };
-  const response = await mongodb.getDb().db().collection('materials').replaceOne({ _id: userId }, contact);
+  const response = await mongodb.getDb().db().collection('materials').replaceOne({ _id: userId }, material);
   if (response.acknowledged) {
     res.status(204).send();
   } else {
-    res.status(500).json(response.error || 'Some error occurred while updating the contact.');
+    res.status(500).json(response.error || 'Some error occurred while updating the material.');
   }
 };
 
-const deleteContact = async (req, res) => {
+const deleteMaterial = async (req, res) => {
   const userId = new ObjectId(req.params.id);
   const response = await mongodb.getDb().db().collection('materials').deleteOne({ _id: userId });
   if (response.acknowledged) {
     res.status(204).send();
   } else {
-    res.status(500).json(response.error || 'Some error occurred while deleting the contact.');
+    res.status(500).json(response.error || 'Some error occurred while deleting the material.');
   }
 };
 
-module.exports = { getAll, getSingle, createContact, updateContact, deleteContact };
+module.exports = { getAll, getSingle, createMaterial, updateMaterial, deleteMaterial };

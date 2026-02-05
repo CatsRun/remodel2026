@@ -22,47 +22,47 @@ const getSingle = async (req, res, next) => {
   });
 };
 
-const createContact = async (req, res) => {
-  const contact = {
+const createJobs = async (req, res) => {
+  const jobs = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
     favoriteColor: req.body.favoriteColor,
     birthday: req.body.birthday
   };
-  const response = await mongodb.getDb().db().collection('jobs').insertOne(contact);
+  const response = await mongodb.getDb().db().collection('jobs').insertOne(jobs);
   if (response.acknowledged) {
     res.status(201).json(response);
   } else {
-    res.status(500).json(response.error || 'Some error occurred while creating the contact.');
+    res.status(500).json(response.error || 'Some error occurred while creating the jobs.');
   }
 };
 
-const updateContact = async (req, res) => {
+const updateJobs = async (req, res) => {
   const userId = new ObjectId(req.params.id);
-  const contact = {
+  const jobs = {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
     favoriteColor: req.body.favoriteColor,
     birthday: req.body.birthday
   };
-  const response = await mongodb.getDb().db().collection('jobs').replaceOne({ _id: userId }, contact);
+  const response = await mongodb.getDb().db().collection('jobs').replaceOne({ _id: userId }, jobs);
   if (response.acknowledged) {
     res.status(204).send();
   } else {
-    res.status(500).json(response.error || 'Some error occurred while updating the contact.');
+    res.status(500).json(response.error || 'Some error occurred while updating the jobs.');
   }
 };
 
-const deleteContact = async (req, res) => {
+const deleteJobs = async (req, res) => {
   const userId = new ObjectId(req.params.id);
   const response = await mongodb.getDb().db().collection('jobs').deleteOne({ _id: userId });
   if (response.acknowledged) {
     res.status(204).send();
   } else {
-    res.status(500).json(response.error || 'Some error occurred while deleting the contact.');
+    res.status(500).json(response.error || 'Some error occurred while deleting the jobs.');
   }
 };
 
-module.exports = { getAll, getSingle, createContact, updateContact, deleteContact };
+module.exports = { getAll, getSingle, createJobs, updateJobs, deleteJobs };

@@ -2,19 +2,19 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/locations');
 
-// get all contacts
+// get all locations
 router.get('/', controller.getAll);
 
-// get single contact by id
+// get single locations by id
 router.get('/:id', controller.getSingle);
 
-// create new contact (post can be used for create or update depending on the function)
-router.post('/', controller.createContact);
+// create new locations (post can be used for create or update depending on the function)
+router.post('/', controller.createLocations);
 
-// update contact by id, replaces old data
-router.put('/:id', controller.updateContact);   
+// update locations by id, replaces old data
+router.put('/:id', controller.updateLocations);   
 
-// delete contact by id
-router.delete('/:id', controller.deleteContact);  
+// delete locations by id
+router.delete('/:id', controller.deleteLocations);  
 
 module.exports = router;

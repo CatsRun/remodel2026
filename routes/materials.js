@@ -9,12 +9,12 @@ router.get('/', controller.getAll);
 router.get('/:id', controller.getSingle);
 
 // create new contact (post can be used for create or update depending on the function)
-router.post('/', controller.createContact);
+router.post('/', controller.createMaterial);
 
 // update contact by id, replaces old data
-router.put('/:id', controller.updateContact);   
+router.put('/:id', controller.updateMaterial);   
 
 // delete contact by id
-router.delete('/:id', controller.deleteContact);  
+router.delete('/:id', controller.deleteMaterial);  
 
 module.exports = router;

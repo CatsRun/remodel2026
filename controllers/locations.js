@@ -22,47 +22,41 @@ const getSingle = async (req, res, next) => {
   });
 };
 
-const createContact = async (req, res) => {
-  const contact = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    favoriteColor: req.body.favoriteColor,
-    birthday: req.body.birthday
+const createLocations = async (req, res) => {
+  const locations = {
+    name: req.body.name,
+    dimensions: req.body.dimensions
   };
-  const response = await mongodb.getDb().db().collection('locations').insertOne(contact);
+  const response = await mongodb.getDb().db().collection('locations').insertOne(locations);
   if (response.acknowledged) {
     res.status(201).json(response);
   } else {
-    res.status(500).json(response.error || 'Some error occurred while creating the contact.');
+    res.status(500).json(response.error || 'Some error occurred while creating the locations.');
   }
 };
 
-const updateContact = async (req, res) => {
+const updateLocations = async (req, res) => {
   const userId = new ObjectId(req.params.id);
-  const contact = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    favoriteColor: req.body.favoriteColor,
-    birthday: req.body.birthday
+  const locations = {
+    name: req.body.name,
+    dimensions: req.body.dimensions
   };
-  const response = await mongodb.getDb().db().collection('locations').replaceOne({ _id: userId }, contact);
+  const response = await mongodb.getDb().db().collection('locations').replaceOne({ _id: userId }, locations);
   if (response.acknowledged) {
     res.status(204).send();
   } else {
-    res.status(500).json(response.error || 'Some error occurred while updating the contact.');
+    res.status(500).json(response.error || 'Some error occurred while updating the locations.');
   }
 };
 
-const deleteContact = async (req, res) => {
+const deleteLocations = async (req, res) => {
   const userId = new ObjectId(req.params.id);
   const response = await mongodb.getDb().db().collection('locations').deleteOne({ _id: userId });
   if (response.acknowledged) {
     res.status(204).send();
   } else {
-    res.status(500).json(response.error || 'Some error occurred while deleting the contact.');
+    res.status(500).json(response.error || 'Some error occurred while deleting the locations.');
   }
 };
 
-module.exports = { getAll, getSingle, createContact, updateContact, deleteContact };
+module.exports = { getAll, getSingle, createLocations, updateLocations, deleteLocations };

@@ -7,6 +7,6 @@ router.get('/', (req, res) => {
 
 router.use('/jobs', require('./jobs'));
 router.use('/materials', require('./materials'));
-router.use('/location', require('./locations'));
+router.use('/locations', require('./locations'));
 
 module.exports = router;
