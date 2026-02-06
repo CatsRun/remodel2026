@@ -24,11 +24,10 @@ const getSingle = async (req, res, next) => {
 
 const createJobs = async (req, res) => {
   const jobs = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    favoriteColor: req.body.favoriteColor,
-    birthday: req.body.birthday
+    location_id: req.body.location_id,
+    location: req.body.location,
+    material_id: req.body.material_id,
+    materialName: req.body.materialName
   };
   const response = await mongodb.getDb().db().collection('jobs').insertOne(jobs);
   if (response.acknowledged) {
@@ -41,11 +40,10 @@ const createJobs = async (req, res) => {
 const updateJobs = async (req, res) => {
   const userId = new ObjectId(req.params.id);
   const jobs = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    favoriteColor: req.body.favoriteColor,
-    birthday: req.body.birthday
+    location_id: req.body.location_id,
+    location: req.body.location,
+    material_id: req.body.material_id,
+    materialName: req.body.materialNamey
   };
   const response = await mongodb.getDb().db().collection('jobs').replaceOne({ _id: userId }, jobs);
   if (response.acknowledged) {
