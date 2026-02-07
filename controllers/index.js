@@ -1,8 +1,6 @@
 const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
 
-// const collectionName = 'jobs'; // make this an if statment that changes based on the route calling it. Change this to 'materials' for the materials controller
-
 const getAll = async (req, res, next) => {
   const result = await mongodb.getDb().db().collection('collectionName').find();
   result.toArray().then((lists) => {

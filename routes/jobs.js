@@ -15,6 +15,10 @@ router.post('/', controller.createJobs);
 router.put('/:id', controller.updateJobs);   
 
 // delete Jobs by id
-router.delete('/:id', controller.deleteJobs);  
+router.delete('/:id', controller.deleteJobs); 
+
+// how do I get the route to go to viewJobs and not the default home?
+// create view of workOrder
+router.get('/', controller.viewJobs);
 
 module.exports = router;

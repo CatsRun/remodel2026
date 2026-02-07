@@ -1,8 +1,5 @@
 // This is the entry point for the application.
 
-// app.get("/",(req, res) => {res.send("Welcome home!")})
-// .use('/', require('./routes'));
-
 const express = require('express');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');

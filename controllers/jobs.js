@@ -63,4 +63,28 @@ const deleteJobs = async (req, res) => {
   }
 };
 
-module.exports = { getAll, getSingle, createJobs, updateJobs, deleteJobs };
+// create view from collections "materials" and "locations"
+const viewJobs = async (req, res) => {
+  const userId = new ObjectId(req.params.id);
+  const responseMaterials = await mongodb.getDb().db().collection('materials').find();
+  const responseLocations = await mongodb.getDb().db().collection('locations').find();
+  const responseJobs = await mongodb.getDb().db().collection('materials').find();
+  result.toArray().then((lists) =>
+
+  db.createView("workOrder", "material",  [
+    {
+      $lookup:
+      {
+        from: "locations",
+        localField: "_id",
+        remoteField: "location_id",
+         as: "location_id"
+      }
+    }
+  ]
+
+  ) 
+  )
+}
+
+module.exports = { getAll, getSingle, createJobs, updateJobs, deleteJobs, viewJobs };
